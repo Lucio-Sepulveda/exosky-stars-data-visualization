@@ -1,12 +1,12 @@
-[gd_scene load_steps=10 format=3 uid="uid://c8qhitat3fwmt"]
+[gd_scene format=3 uid="uid://c8qhitat3fwmt"]
 
-[ext_resource type="Script" path="res://scripts/main.gd" id="1_64law"]
-[ext_resource type="Script" path="res://scripts/space.gd" id="2_eua3t"]
+[ext_resource type="Script" uid="uid://djqvmaiidov77" path="res://scripts/main.gd" id="1_64law"]
+[ext_resource type="Script" uid="uid://bxb73kgpdi7a" path="res://scripts/space.gd" id="2_eua3t"]
 [ext_resource type="PackedScene" uid="uid://b0nt4n13a6448" path="res://addons/starlight/Stars.tscn" id="2_s3r80"]
-[ext_resource type="Script" path="res://addons/free_look_camera.gd" id="3_lwc6e"]
-[ext_resource type="Script" path="res://scripts/stars_generator.gd" id="4_ewjt0"]
-[ext_resource type="Script" path="res://scripts/star_data_reader.gd" id="5_i800h"]
-[ext_resource type="Script" path="res://scripts/constellation_editor.gd" id="6_0fq35"]
+[ext_resource type="Script" uid="uid://b217j1q5rdnwx" path="res://addons/free_look_camera.gd" id="3_lwc6e"]
+[ext_resource type="Script" uid="uid://qu0jvx8xkpim" path="res://scripts/stars_generator.gd" id="4_ewjt0"]
+[ext_resource type="Script" uid="uid://byf62p200iwby" path="res://scripts/star_data_reader.gd" id="5_i800h"]
+[ext_resource type="Script" uid="uid://d14h7j5bsxphs" path="res://scripts/constellation_editor.gd" id="6_0fq35"]
 
 [sub_resource type="Environment" id="Environment_f7ewi"]
 background_mode = 2
@@ -15,10 +15,10 @@ ambient_light_energy = 0.0
 
 [sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_fpeva"]
 
-[node name="Main" type="Node"]
+[node name="Main" type="Node" unique_id=817453021]
 script = ExtResource("1_64law")
 
-[node name="Space" type="SubViewportContainer" parent="."]
+[node name="Space" type="SubViewportContainer" parent="." unique_id=1028647843]
 anchors_preset = -1
 anchor_left = 0.1
 anchor_right = 1.0
@@ -26,27 +26,27 @@ anchor_bottom = 1.0
 stretch = true
 script = ExtResource("2_eua3t")
 
-[node name="SubViewport" type="SubViewport" parent="Space"]
+[node name="SubViewport" type="SubViewport" parent="Space" unique_id=245480322]
 handle_input_locally = false
 size = Vector2i(1036, 648)
 render_target_update_mode = 4
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="Space/SubViewport"]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Space/SubViewport" unique_id=742989928]
 environment = SubResource("Environment_f7ewi")
 camera_attributes = SubResource("CameraAttributesPractical_fpeva")
 
-[node name="Camera3D" type="Camera3D" parent="Space/SubViewport"]
+[node name="Camera3D" type="Camera3D" parent="Space/SubViewport" unique_id=1405457697]
 script = ExtResource("3_lwc6e")
 
-[node name="Stars" parent="Space/SubViewport" instance=ExtResource("2_s3r80")]
+[node name="Stars" parent="Space/SubViewport" unique_id=1119772451 instance=ExtResource("2_s3r80")]
 unique_name_in_owner = true
 script = ExtResource("4_ewjt0")
 
-[node name="StarDataReader" type="Node" parent="Space/SubViewport"]
+[node name="StarDataReader" type="Node" parent="Space/SubViewport" unique_id=342400044]
 unique_name_in_owner = true
 script = ExtResource("5_i800h")
 
-[node name="ConstellationEditor" type="SubViewportContainer" parent="."]
+[node name="ConstellationEditor" type="SubViewportContainer" parent="." unique_id=1489480104]
 visible = false
 anchors_preset = -1
 anchor_left = 0.1
@@ -57,12 +57,12 @@ grow_vertical = 2
 stretch = true
 script = ExtResource("6_0fq35")
 
-[node name="SubViewport" type="SubViewport" parent="ConstellationEditor"]
+[node name="SubViewport" type="SubViewport" parent="ConstellationEditor" unique_id=1660317260]
 handle_input_locally = false
 size = Vector2i(1036, 648)
 render_target_update_mode = 0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ConstellationEditor/SubViewport"]
+[node name="VBoxContainer" type="VBoxContainer" parent="ConstellationEditor/SubViewport" unique_id=1599227625]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -71,35 +71,35 @@ grow_vertical = 2
 theme_override_constants/separation = 10
 alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="ConstellationEditor/SubViewport/VBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="ConstellationEditor/SubViewport/VBoxContainer" unique_id=104128981]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 expand_mode = 3
 stretch_mode = 5
 
-[node name="Buttons" type="HBoxContainer" parent="ConstellationEditor/SubViewport/VBoxContainer"]
+[node name="Buttons" type="HBoxContainer" parent="ConstellationEditor/SubViewport/VBoxContainer" unique_id=142662644]
 layout_mode = 2
 theme_override_constants/separation = 205
 alignment = 1
 
-[node name="CaptureButton" type="Button" parent="ConstellationEditor/SubViewport/VBoxContainer/Buttons"]
+[node name="CaptureButton" type="Button" parent="ConstellationEditor/SubViewport/VBoxContainer/Buttons" unique_id=1128975950]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "Guardar captura"
 
-[node name="DrawButton" type="Button" parent="ConstellationEditor/SubViewport/VBoxContainer/Buttons"]
+[node name="DrawButton" type="Button" parent="ConstellationEditor/SubViewport/VBoxContainer/Buttons" unique_id=745792377]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "Dibujar"
 
-[node name="UserInterface" type="Control" parent="."]
+[node name="UserInterface" type="Control" parent="." unique_id=384800846]
 layout_mode = 3
 anchor_right = 0.1
 anchor_bottom = 1.0
 grow_vertical = 2
 
-[node name="TextureRect" type="ColorRect" parent="UserInterface"]
+[node name="TextureRect" type="ColorRect" parent="UserInterface" unique_id=517979264]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -108,7 +108,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.124804, 0.0899187, 0.105458, 1)
 
-[node name="Title" type="Label" parent="UserInterface"]
+[node name="Title" type="Label" parent="UserInterface" unique_id=1772841202]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -122,7 +122,7 @@ text = "MODO
 FOTO"
 horizontal_alignment = 1
 
-[node name="Buttons" type="VBoxContainer" parent="UserInterface"]
+[node name="Buttons" type="VBoxContainer" parent="UserInterface" unique_id=1217646610]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -132,12 +132,12 @@ grow_vertical = 2
 theme_override_constants/separation = 175
 alignment = 1
 
-[node name="ActivateButton" type="Button" parent="UserInterface/Buttons"]
+[node name="ActivateButton" type="Button" parent="UserInterface/Buttons" unique_id=1962976791]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "ACTIVAR"
 
-[node name="DesactivateButton" type="Button" parent="UserInterface/Buttons"]
+[node name="DesactivateButton" type="Button" parent="UserInterface/Buttons" unique_id=2092376148]
 layout_mode = 2
 text = "DESACTIVAR"
 
