@@ -1,0 +1,147 @@
+[gd_scene load_steps=10 format=3 uid="uid://c8qhitat3fwmt"]
+
+[ext_resource type="Script" path="res://scripts/main.gd" id="1_64law"]
+[ext_resource type="Script" path="res://scripts/space.gd" id="2_eua3t"]
+[ext_resource type="PackedScene" uid="uid://b0nt4n13a6448" path="res://addons/starlight/Stars.tscn" id="2_s3r80"]
+[ext_resource type="Script" path="res://addons/free_look_camera.gd" id="3_lwc6e"]
+[ext_resource type="Script" path="res://scripts/stars_generator.gd" id="4_ewjt0"]
+[ext_resource type="Script" path="res://scripts/star_data_reader.gd" id="5_i800h"]
+[ext_resource type="Script" path="res://scripts/constellation_editor.gd" id="6_0fq35"]
+
+[sub_resource type="Environment" id="Environment_f7ewi"]
+background_mode = 2
+ambient_light_sky_contribution = 0.0
+ambient_light_energy = 0.0
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_fpeva"]
+
+[node name="Main" type="Node"]
+script = ExtResource("1_64law")
+
+[node name="Space" type="SubViewportContainer" parent="."]
+anchors_preset = -1
+anchor_left = 0.1
+anchor_right = 1.0
+anchor_bottom = 1.0
+stretch = true
+script = ExtResource("2_eua3t")
+
+[node name="SubViewport" type="SubViewport" parent="Space"]
+handle_input_locally = false
+size = Vector2i(1036, 648)
+render_target_update_mode = 4
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Space/SubViewport"]
+environment = SubResource("Environment_f7ewi")
+camera_attributes = SubResource("CameraAttributesPractical_fpeva")
+
+[node name="Camera3D" type="Camera3D" parent="Space/SubViewport"]
+script = ExtResource("3_lwc6e")
+
+[node name="Stars" parent="Space/SubViewport" instance=ExtResource("2_s3r80")]
+unique_name_in_owner = true
+script = ExtResource("4_ewjt0")
+
+[node name="StarDataReader" type="Node" parent="Space/SubViewport"]
+unique_name_in_owner = true
+script = ExtResource("5_i800h")
+
+[node name="ConstellationEditor" type="SubViewportContainer" parent="."]
+visible = false
+anchors_preset = -1
+anchor_left = 0.1
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+script = ExtResource("6_0fq35")
+
+[node name="SubViewport" type="SubViewport" parent="ConstellationEditor"]
+handle_input_locally = false
+size = Vector2i(1036, 648)
+render_target_update_mode = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ConstellationEditor/SubViewport"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="ConstellationEditor/SubViewport/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+expand_mode = 3
+stretch_mode = 5
+
+[node name="Buttons" type="HBoxContainer" parent="ConstellationEditor/SubViewport/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 205
+alignment = 1
+
+[node name="CaptureButton" type="Button" parent="ConstellationEditor/SubViewport/VBoxContainer/Buttons"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Guardar captura"
+
+[node name="DrawButton" type="Button" parent="ConstellationEditor/SubViewport/VBoxContainer/Buttons"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Dibujar"
+
+[node name="UserInterface" type="Control" parent="."]
+layout_mode = 3
+anchor_right = 0.1
+anchor_bottom = 1.0
+grow_vertical = 2
+
+[node name="TextureRect" type="ColorRect" parent="UserInterface"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.124804, 0.0899187, 0.105458, 1)
+
+[node name="Title" type="Label" parent="UserInterface"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -57.5
+offset_right = 57.5
+offset_bottom = 87.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 30
+text = "MODO 
+FOTO"
+horizontal_alignment = 1
+
+[node name="Buttons" type="VBoxContainer" parent="UserInterface"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 175
+alignment = 1
+
+[node name="ActivateButton" type="Button" parent="UserInterface/Buttons"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "ACTIVAR"
+
+[node name="DesactivateButton" type="Button" parent="UserInterface/Buttons"]
+layout_mode = 2
+text = "DESACTIVAR"
+
+[connection signal="pressed" from="ConstellationEditor/SubViewport/VBoxContainer/Buttons/CaptureButton" to="ConstellationEditor" method="_on_capture_button_pressed"]
+[connection signal="pressed" from="ConstellationEditor/SubViewport/VBoxContainer/Buttons/DrawButton" to="ConstellationEditor" method="_on_draw_button_pressed"]
+[connection signal="pressed" from="UserInterface/Buttons/ActivateButton" to="." method="_on_activate_button_pressed"]
+[connection signal="pressed" from="UserInterface/Buttons/DesactivateButton" to="." method="_on_desactivate_button_pressed"]
