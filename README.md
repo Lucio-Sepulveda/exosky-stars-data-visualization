@@ -8,7 +8,7 @@ An interactive 3D visualization application that displays star positions and tem
 
 **🏆 First Place Winner** - NASA International Space Apps Challenge 2024 (Local Site)
 
-![ExoSky Visualization](screenshots/photo_mode.png.png)
+![ExoSky Visualization](screenshots/photo_mode.png)
 *Replace with actual screenshot path*
 
 ## 📖 About
@@ -75,10 +75,10 @@ This project uses the [Godot Starlight](https://github.com/tiffany352/godot-star
 
 ## 🖼️ Screenshots
 
-![Normal View](screenshots/app.png.png)
+![Normal View](screenshots/app.png)
 *3D star field visualization*
 
-![Photo Mode](screenshots/photo_mode.png.png)
+![Photo Mode](screenshots/photo_mode.png)
 *Photo mode with custom constellation*
 
 ## ⚠️ Known Issues
